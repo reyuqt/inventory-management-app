@@ -6,6 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app import crud, schemas
+from app.crud.crud_item import crud_item
 from app.db.session import get_db
 from app.core.security import get_current_active_user
 from app.models.user import User
@@ -16,6 +17,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
+
 @router.post("/", response_model=schemas.Item, status_code=status.HTTP_201_CREATED)
 def create_item(
     item_in: schemas.ItemCreate,
@@ -25,7 +27,7 @@ def create_item(
     """
     Create a new inventory item.
     """
-    return crud.crud_item.create(db=db, item=item_in)
+    return crud_item.create(db=db, item=item_in)
 
 
 @router.get("/", response_model=List[schemas.Item])
@@ -38,7 +40,7 @@ def read_items(
     """
     Retrieve a list of inventory items.
     """
-    items = crud.crud_item.get_multi(db, skip=skip, limit=limit)
+    items = crud_item.get_multi(db, skip=skip, limit=limit)
     return items
 
 
@@ -51,7 +53,7 @@ def read_item(
     """
     Retrieve a specific inventory item by ID.
     """
-    item = crud.crud_item.get(db, item_id=item_id)
+    item = crud_item.get(db, item_id=item_id)
     if not item:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -70,13 +72,13 @@ def update_item(
     """
     Update an existing inventory item.
     """
-    item = crud.crud_item.get(db, item_id=item_id)
+    item = crud_item.get(db, item_id=item_id)
     if not item:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Item not found.",
         )
-    return crud.crud_item.update(db=db, db_item=item, updates=item_in)
+    return crud_item.update(db=db, db_item=item, updates=item_in)
 
 
 @router.delete("/{item_id}", response_model=schemas.Item)
@@ -88,10 +90,10 @@ def delete_item(
     """
     Delete an inventory item.
     """
-    item = crud.crud_item.get(db, item_id=item_id)
+    item = crud_item.get(db, item_id=item_id)
     if not item:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Item not found.",
         )
-    return crud.crud_item.remove(db=db, db_item=item)
+    return crud_item.remove(db=db, db_item=item)
