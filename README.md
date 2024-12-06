@@ -58,3 +58,11 @@
 [React](https://react.dev/reference/react)
 
 [Docker](https://docs.docker.com/)
+
+
+FastAPI Documentation: https://fastapi.tiangolo.com/
+Pydantic Documentation: https://pydantic-docs.helpmanual.io/
+SQLAlchemy Documentation: https://www.sqlalchemy.org/
+Uvicorn Documentation: https://www.uvicorn.org/
+Docker Documentation: https://docs.docker.com/
+Pytest Documentation: https://docs.pytest.org/
