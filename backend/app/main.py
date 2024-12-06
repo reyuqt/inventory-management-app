@@ -7,14 +7,12 @@ from app.api.v1.endpoints import auth, items, users
 from app.db.base import Base
 from app.db.session import engine
 from app.core.config import settings
-
 # Import models to ensure they're registered
 from app.models.user import User
 from app.models.item import Item
 
 # Create all tables
 Base.metadata.create_all(bind=engine)
-
 # Initialize FastAPI app
 app = FastAPI(
     title=settings.PROJECT_NAME,
