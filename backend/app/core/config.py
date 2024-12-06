@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     PROJECT_VERSION: str = "1.0.0"
 
     # Database Configuration
-    DATABASE_URL: str = Field("http://localhost:324324", env="DATABASE_URL")
+    DATABASE_URL: str = Field("postgresql://admin:password123@localhost:5432/inventory_db", env="DATABASE_URL")
 
     # Security Settings
     SECRET_KEY: str = Field("UVZuuakoEXXy1wil4KkXLTnbgrbqSeBj", env="SECRET_KEY")
