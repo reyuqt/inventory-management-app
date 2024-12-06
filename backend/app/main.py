@@ -42,7 +42,7 @@ app.include_router(
     tags=["auth"],
     dependencies=[],
 )
-
+'''
 app.include_router(
     items.router,
     prefix="/api/v1/items",
@@ -55,7 +55,7 @@ app.include_router(
     prefix="/api/v1/users",
     tags=["users"],
     dependencies=[],
-)
+)'''
 
 # Root endpoint
 @app.get("/", tags=["Root"])
