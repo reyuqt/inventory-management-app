@@ -5,7 +5,6 @@ from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
 
 from app import crud, schemas
-from app.crud import crud_user
 from app.db.session import get_db
 from app.core.security import create_access_token, get_current_user
 
@@ -15,12 +14,13 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
+
 @router.post("/login", response_model=schemas.Token)
 def login_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db)
 ):
-    user = crud_user.CRUDUser.authenticate(
+    user = crud.crud_user.authenticate(
         db, username=form_data.username, password=form_data.password
     )
     if not user:
