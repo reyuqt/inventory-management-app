@@ -7,9 +7,8 @@ from fastapi.security import OAuth2PasswordRequestForm
 from app import crud, schemas
 from app.db.session import get_db
 from app.core.security import create_access_token, get_current_user
-
+from app.crud.crud_user import crud_user
 router = APIRouter(
-    prefix="/auth",
     tags=["auth"],
     responses={404: {"description": "Not found"}},
 )
@@ -20,7 +19,7 @@ def login_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db)
 ):
-    user = crud.crud_user.authenticate(
+    user = crud_user.authenticate(
         db, username=form_data.username, password=form_data.password
     )
     if not user:
