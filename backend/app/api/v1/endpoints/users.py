@@ -12,7 +12,6 @@ from app.core.security import get_current_active_user
 from app.models.user import User
 
 router = APIRouter(
-    prefix="/users",
     tags=["users"],
     responses={404: {"description": "Not found"}},
 )
@@ -22,7 +21,7 @@ router = APIRouter(
 def create_user(
     user_in: schemas.UserCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_active_user),
+    #current_user: User = Depends(get_current_active_user),
 ):
     """
     Create a new user.
