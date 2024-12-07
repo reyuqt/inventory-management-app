@@ -46,11 +46,11 @@ app.include_router(
     tags=["items"],
 )
 
-'''app.include_router(
+app.include_router(
     users.router,
     prefix="/api/v1/users",
     tags=["users"],
-)'''
+)
 
 # Root endpoint
 @app.get("/", tags=["Root"])
