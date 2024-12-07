@@ -1,5 +1,13 @@
 import React, { useState } from "react";
 import { createUser } from "../services/userService";
+import {
+  Container,
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Alert,
+} from "@mui/material";
 
 function RegisterUser() {
   const [formData, setFormData] = useState({
@@ -28,44 +36,53 @@ function RegisterUser() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h2>Register User</h2>
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-      {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-    </div>
+    <Container maxWidth="sm">
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{
+          mt: 8,
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+        }}
+      >
+        <Typography variant="h4" align="center" gutterBottom>
+          Register User
+        </Typography>
+        <TextField
+          label="Username"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          required
+          fullWidth
+        />
+        <TextField
+          label="Email"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          fullWidth
+        />
+        <TextField
+          label="Password"
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+          fullWidth
+        />
+        <Button type="submit" variant="contained" color="primary" fullWidth>
+          Register
+        </Button>
+        {successMessage && <Alert severity="success">{successMessage}</Alert>}
+        {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+      </Box>
+    </Container>
   );
 }
 

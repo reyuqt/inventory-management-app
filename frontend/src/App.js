@@ -7,24 +7,11 @@ import Inventory from "./pages/Inventory";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Logout from "./components/Logout";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#1976d2", // Default blue color
-    },
-    secondary: {
-      main: "#dc004e", // Pink color
-    },
-  },
-  typography: {
-    fontFamily: "Roboto, Arial, sans-serif",
-  },
-});
+import { CustomThemeProvider } from "./contexts/ThemeContext";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <CustomThemeProvider>
       <Router>
         <Navbar />
         <Routes>
@@ -35,7 +22,7 @@ function App() {
           <Route path="/logout" element={<Logout />} />
         </Routes>
       </Router>
-    </ThemeProvider>
+    </CustomThemeProvider>
   );
 }
 
