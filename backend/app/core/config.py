@@ -40,9 +40,7 @@ class Settings(BaseSettings):
     # Any other settings can be added here
 
     class Config:
-        # Path to the .env file
-        env_file = Path(__file__).resolve().parent.parent.parent / ".env"
-        env_file_encoding = 'utf-8'
+        env_file = ".env"  # Specify the .env file
 
 
 settings = Settings()

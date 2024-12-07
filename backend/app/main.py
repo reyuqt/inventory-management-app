@@ -52,6 +52,7 @@ app.include_router(
     tags=["users"],
 )
 
+
 # Root endpoint
 @app.get("/", tags=["Root"])
 def read_root():

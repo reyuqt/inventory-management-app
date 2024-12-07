@@ -50,6 +50,7 @@ function Login() {
                 <TextField
                     label="Username"
                     name="username"
+                    defaultValue="testuser"
                     value={formData.username}
                     onChange={handleChange}
                     required
@@ -59,6 +60,7 @@ function Login() {
                     label="Password"
                     type="password"
                     name="password"
+                    efaultValue="testpassword"
                     value={formData.password}
                     onChange={handleChange}
                     required
