@@ -5,12 +5,10 @@ import Home from "./pages/Home";
 import Inventory from "./pages/Inventory";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Logout from "./components/Logout";
-import { CustomThemeProvider } from "./contexts/ThemeContext";
+import LogoutUser from "./components/LogoutUser";
 
 function App() {
   return (
-    <CustomThemeProvider>
       <Router>
         <Navbar />
         <Routes>
@@ -18,10 +16,9 @@ function App() {
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route path="/logout" element={<LogoutUser />} />
         </Routes>
       </Router>
-    </CustomThemeProvider>
   );
 }
 

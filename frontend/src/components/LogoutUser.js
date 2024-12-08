@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+import {useAuth} from "../contexts/AuthContext";
 
-function Logout() {
+function LogoutUser() {
   const navigate = useNavigate();
-
+  const { logoutContext } = useAuth();
   useEffect(() => {
+    logoutContext()
     // Clear the stored token on logout
     localStorage.removeItem("accessToken");
     navigate("/login"); // Redirect to login page
@@ -17,4 +19,4 @@ function Logout() {
   );
 }
 
-export default Logout;
+export default LogoutUser;
