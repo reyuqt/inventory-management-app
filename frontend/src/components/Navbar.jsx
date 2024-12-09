@@ -25,12 +25,9 @@ function Navbar() {
 
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <HomeButton isMobile={isMobile} />
-          {!isLoggedIn && <RegisterButton isMobile={isMobile} />}
-          {!isLoggedIn ? (
-            <LoginButton isMobile={isMobile} />
-          ) : (
-            <LogoutButton isMobile={isMobile} />
-          )}
+          <RegisterButton isMobile={isMobile} isLoggedIn={isLoggedIn} />
+          <LoginButton isMobile={isMobile} isLoggedIn={isLoggedIn} />
+          <LogoutButton isMobile={isMobile} isLoggedIn={isLoggedIn} />
           <ThemeToggleButton mode={mode} toggleTheme={toggleTheme} />
         </Box>
       </Toolbar>
