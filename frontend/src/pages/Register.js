@@ -1,6 +1,6 @@
 import React from "react";
-import RegisterUser from "../components/RegisterUser";
-import { Container, Typography, Box } from "@mui/material";
+import RegisterUser from "../components/RegisterUser.jsx";
+import { Container } from "@mui/material";
 
 function Register() {
   return (
