@@ -10,7 +10,7 @@ function LogoutUser() {
     // Clear the stored token on logout
     localStorage.removeItem("accessToken");
     navigate("/login"); // Redirect to login page
-  }, [navigate]);
+  }, [navigate, logoutContext]);
 
   return (
     <div>

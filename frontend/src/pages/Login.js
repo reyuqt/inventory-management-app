@@ -1,7 +1,7 @@
 
 import React from "react";
-import LoginUser from "../components/LoginUser";
-import { Container, Typography, Box } from "@mui/material";
+import LoginUser from "../components/LoginUser.jsx";
+import { Container } from "@mui/material";
 
 function Login() {
   return (

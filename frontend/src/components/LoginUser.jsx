@@ -1,59 +1,60 @@
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {login} from "../services/authService";
-import {TextField, Button, Container, Typography, Box} from "@mui/material";
+// Import statements
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../services/authService";
+import { TextField, Button, Container, Typography, Box } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
 
-
+// Functional Component: LoginUser
 function LoginUser() {
-  const [formData, setFormData] = useState({username: "", password: ""});
+  // State for form data and error messages
+  const [formData, setFormData] = useState({ username: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
+
+  // Hooks
   const navigate = useNavigate();
   const { loginContext } = useAuth();
 
+  // Handle form field changes
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    setFormData({...formData, [name]: value});
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent page refresh
     try {
       const response = await login(formData.username, formData.password);
       if (response && response.access_token) {
-        // Successfully logged in
-        loginContext()
-        localStorage.setItem("accessToken", response.access_token); // Store token
-        setErrorMessage(""); // Clear error message
-        navigate("/inventory"); // Redirect to inventory
+        loginContext(); // Update auth context
+        localStorage.setItem("accessToken", response.access_token);
+        setErrorMessage(""); // Clear any previous errors
+        navigate("/inventory"); // Redirect on successful login
       } else {
-        // Handle unexpected responses
         setErrorMessage("Unexpected response. Please try again.");
       }
     } catch (error) {
-      // Check if the error has a response and a status code
       if (error.response && error.response.status === 401) {
-        setErrorMessage("Invalid username or password."); // Specific error message for 401
+        setErrorMessage("Invalid username or password.");
       } else {
-        setErrorMessage("An error occurred. Please try again later."); // General error message
+        setErrorMessage("An error occurred. Please try again later.");
       }
     }
   };
 
+  // Component render
   return (
     <Container maxWidth="sm">
       <Box
         component="form"
         onSubmit={handleSubmit}
-        sx={{mt: 8, display: "flex", flexDirection: "column", gap: 2}}
+        sx={{ mt: 8, display: "flex", flexDirection: "column", gap: 2 }}
       >
-        <Typography variant="h4" align="center">
-          Login
-        </Typography>
+        <Typography variant="h4" align="center">Login</Typography>
         <TextField
           label="Username"
           name="username"
-          defaultValue="testuser"
           value={formData.username}
           onChange={handleChange}
           required
@@ -63,7 +64,6 @@ function LoginUser() {
           label="Password"
           type="password"
           name="password"
-          efaultValue="testpassword"
           value={formData.password}
           onChange={handleChange}
           required
@@ -83,7 +83,3 @@ function LoginUser() {
 }
 
 export default LoginUser;
-
-
-
-
