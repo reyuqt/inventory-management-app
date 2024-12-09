@@ -2,9 +2,9 @@ import React from 'react';
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 import { Search as SearchIcon, Print as PrintIcon, CameraAlt as ScanIcon } from '@mui/icons-material';
 
-const SpeedDialMenu = () => {
+const SpeedDialMenu = ({ onSearchClick }) => {
   const actions = [
-    { icon: <SearchIcon />, name: 'Search', onClick: () => console.log('Search action clicked') },
+    { icon: <SearchIcon />, name: 'Search', onClick: onSearchClick },
     { icon: <ScanIcon />, name: 'Scan', onClick: () => console.log('Scan action clicked') },
     { icon: <PrintIcon />, name: 'Print', onClick: () => console.log('Print action clicked') },
   ];
