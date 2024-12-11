@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 
 const HomeButton = ({ isMobile }) => (
   isMobile ? (
-    <IconButton color="inherit" component={Link} to="/">
+    <IconButton color="inherit" component={Link} to="/inventory">
       <HomeIcon />
     </IconButton>
   ) : (
-    <Button color="inherit" component={Link} to="/">Home</Button>
+    <Button color="inherit" component={Link} to="/inventory">Home</Button>
   )
 );
 
