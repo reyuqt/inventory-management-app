@@ -22,7 +22,7 @@ const SearchBar = forwardRef(({ onSearch, ...props }, ref) => {
         variant="standard"
         value={value}
         onChange={handleChange}
-        inputRef={ref} // Still forwarding the ref if needed
+        inputRef={ref}
         fullWidth
         {...props}
       />
