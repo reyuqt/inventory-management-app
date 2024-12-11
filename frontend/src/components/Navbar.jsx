@@ -11,8 +11,11 @@ import LogoutButton from "./buttons/LogoutButton";
 import ThemeToggleButton from "./buttons/ThemeToggleButton";
 import ScannerControl from './ScannerControl';
 import SpeedDialMenu from './SpeedDialMenu';
+import {searchItems} from '../services/searchService'; // Import the search service
 
 function Navbar() {
+  const [searchResults, setSearchResults] = useState([]);
+
   const {mode, toggleTheme} = useContext(ThemeContext);
   const {isLoggedIn} = useAuth();
   const theme = useTheme();
@@ -21,6 +24,23 @@ function Navbar() {
   const searchInputRef = useRef(null);  // Ref for SearchBar input
   const scannerControlRef = useRef(null);
 
+  const handleSearch = async (query) => {
+    if (!query) {
+      setSearchResults([]);
+      return;
+    }
+
+
+    try {
+      const response = await searchItems(query);
+      setSearchResults(response.data);
+      console.log(searchResults)
+    } catch (err) {
+      console.error(err);
+    } finally {
+      console.log('finally')
+    }
+  };
   const handleScanClick = () => {
     if (scannerControlRef.current) {
       scannerControlRef.current.startScanner();
@@ -46,7 +66,7 @@ function Navbar() {
     <div>
       <AppBar position="static">
         <Toolbar>
-          <SearchBar ref={searchInputRef}/> {/* This ref refers to the actual input element inside SearchBar */}
+          <SearchBar ref={searchInputRef} onSearch={handleSearch}/> {/* This ref refers to the actual input element inside SearchBar */}
           <Box sx={{flexGrow: 1}}/>
           <Box sx={{display: 'flex', alignItems: 'center'}}>
             <HomeButton isMobile={isMobile}/>

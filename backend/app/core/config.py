@@ -3,13 +3,26 @@
 from pydantic_settings import BaseSettings
 from pydantic import Field, EmailStr
 from typing import List, Optional
-from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+# Load the base .env file if it exists
+load_dotenv("../../.env", override=False)
+
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+
+# Load environment-specific .env files
+if ENVIRONMENT == "docker":
+    load_dotenv("../../.env.docker", override=True)
+elif ENVIRONMENT == "development":
+    load_dotenv("../../.env.local", override=True)
 
 
 class Settings(BaseSettings):
     # Project Information
     PROJECT_NAME: str = "Inventory Management API"
     PROJECT_VERSION: str = "1.0.0"
+    ENVIRONMENT: str = Field("development", env="ENVIRONMENT")
 
     # Database Configuration
     DATABASE_URL: str = Field("postgresql://admin:password123@db:5432/inventory_db", env="DATABASE_URL")
@@ -21,7 +34,7 @@ class Settings(BaseSettings):
 
     # CORS Configuration
     BACKEND_CORS_ORIGINS: List[str] = Field(
-        default=["http://localhost", "http://localhost:3000"],
+        default_factory=lambda: ["http://localhost", "http://localhost:3000"],
         env="BACKEND_CORS_ORIGINS"
     )
 
@@ -40,7 +53,8 @@ class Settings(BaseSettings):
     # Any other settings can be added here
 
     class Config:
-        env_file = ".env"  # Specify the .env file
+        # Do not specify env_file here since it's handled manually above
+        case_sensitive = True  # If you want environment variables to be case-sensitive
 
 
 settings = Settings()

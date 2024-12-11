@@ -5,6 +5,7 @@ from pydantic import BaseModel
 
 
 class ItemBase(BaseModel):
+    id: int
     name: str
     description: Optional[str] = None
     price: float

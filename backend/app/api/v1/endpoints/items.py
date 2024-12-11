@@ -6,13 +6,13 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app import crud, schemas
+from app.core.logger import logger
 from app.crud.crud_item import crud_item
 from app.db.session import get_db
 from app.core.security import get_current_active_user
 from app.models.user import User
 
 router = APIRouter(
-    prefix="/items",
     tags=["items"],
     responses={404: {"description": "Not found"}},
 )
@@ -40,7 +40,9 @@ def read_items(
     """
     Retrieve a list of inventory items.
     """
+    logger.debug("Getting items")
     items = crud_item.get_multi(db, skip=skip, limit=limit)
+    logger.debug(items)
     return items
 
 
