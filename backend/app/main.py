@@ -9,6 +9,7 @@ from app.middleware.logging_middleware import LoggingMiddleware
 from app.api.v1.endpoints import auth, items, users
 from app.db.base import Base
 from app.db.session import engine
+from app.db.seed import seed_database
 from app.core.config import settings
 # Import models to ensure they're registered
 from app.models.user import User
@@ -23,6 +24,7 @@ async def lifespan(app: FastAPI):
     # Shutdown logic
     logger.info("Application shutdown")
 
+seed_database()
 
 # Create all tables
 Base.metadata.create_all(bind=engine)
