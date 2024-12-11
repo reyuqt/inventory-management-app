@@ -55,6 +55,7 @@ export const CustomThemeProvider = ({ children }) => {
         typography: {
           fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
         },
+        spacing: 8, // Default spacing unit
       }),
     [mode]
   );

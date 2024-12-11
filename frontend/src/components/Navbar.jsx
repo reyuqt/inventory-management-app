@@ -1,5 +1,5 @@
 import React, {useContext, useRef, useState} from "react";
-import {AppBar, Toolbar, Box, useMediaQuery} from "@mui/material";
+import {AppBar, Toolbar, Box, useMediaQuery, Button} from "@mui/material";
 import {useTheme} from "@mui/material/styles";
 import {ThemeContext} from "../contexts/ThemeContext";
 import {useAuth} from "../contexts/AuthContext";
@@ -9,9 +9,11 @@ import RegisterButton from "./buttons/RegisterButton";
 import LoginButton from "./buttons/LoginButton";
 import LogoutButton from "./buttons/LogoutButton";
 import ThemeToggleButton from "./buttons/ThemeToggleButton";
+import DashboardButton from "./buttons/DashboardButton";
 import ScannerControl from './ScannerControl';
 import SpeedDialMenu from './SpeedDialMenu';
 import {searchItems} from '../services/searchService'; // Import the search service
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   const [searchResults, setSearchResults] = useState([]);
@@ -73,6 +75,7 @@ function Navbar() {
             <RegisterButton isMobile={isMobile} isLoggedIn={isLoggedIn}/>
             <LoginButton isMobile={isMobile} isLoggedIn={isLoggedIn}/>
             <LogoutButton isMobile={isMobile} isLoggedIn={isLoggedIn}/>
+            <DashboardButton isMobile={isMobile} isLoggedIn={isLoggedIn}/>
             <ThemeToggleButton mode={mode} toggleTheme={toggleTheme}/>
           </Box>
         </Toolbar>

@@ -4,9 +4,11 @@ import {DataGrid} from "@mui/x-data-grid";
 // Component for displaying items in a DataGrid
 function ItemsTable({items}) {
   const columns = [
-    {field: "id", headerName: "ID", width: 100},
-    {field: "name", headerName: "Name", width: 200},
-    {field: "quantity", headerName: "Quantity", width: 150},
+    { field: "id", headerName: "ID", width: 100 },
+    { field: "name", headerName: "Name", width: 200 },
+    { field: "quantity", headerName: "Quantity", width: 150 },
+    { field: "price", headerName: "Price", width: 150},
+    { field: "isActive", headerName: "Active", width: 100 },
   ];
 
   return (

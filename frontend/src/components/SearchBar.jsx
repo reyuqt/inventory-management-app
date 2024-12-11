@@ -1,8 +1,10 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState, forwardRef, useContext } from 'react';
 import TextField from '@mui/material/TextField';
+import ItemsContext from '../contexts/ItemsContext';
 
 const SearchBar = forwardRef(({ onSearch, ...props }, ref) => {
   const [value, setValue] = useState('');
+  const items = useContext(ItemsContext);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -11,7 +13,10 @@ const SearchBar = forwardRef(({ onSearch, ...props }, ref) => {
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevents page reload
     if (onSearch) {
-      onSearch(value); // Invoke the search callback with the current input value
+      const filteredItems = items.filter(item =>
+        item.name.toLowerCase().includes(value.toLowerCase())
+      );
+      onSearch(filteredItems); // Invoke the search callback with filtered items
     }
   };
 
